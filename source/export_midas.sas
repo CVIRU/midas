@@ -1,3 +1,8 @@
+/*********************************************************
+* Project: Export MIDAS                                  *
+* Author: Davit Sargsyan                                 *
+* Created: 07/08/2017                                    *
+**********************************************************/
 libname midas 'C:\MIDAS';
 
 %INCLUDE 'C:/MIDAS/MIDAS format.sas';
