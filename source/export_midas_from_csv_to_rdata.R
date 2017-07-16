@@ -38,16 +38,23 @@ gc()
 # Read Patient Type from CSV----
 # The CSV was created on 07/08/2017 with 'get_pat_type.sas' file
 midas15_pat_type <- fread("C:/MIDAS/midas_pat_type_2008_2015.csv")
-setkey(midas15_pat_type, Patient_ID, ADMDAT)
+setkey(midas15_pat_type,
+       Patient_ID,
+       ADMDAT)
 
 # For now, remove HOSP as the numbers are incompatable
 # Ask Jerry for HOSP and DIV in 2008 to 2015 data (07/08/02017)
+# midas15_pat_type[, HOSP := NULL]
+# NOTE: Used Jerry's code below (from Jerry's email, 07/14/2017)
 unique(midas15_pat_type$HOSP)
-midas15_pat_type[, HOSP := NULL]
+midas15_pat_type$HOSP <- as.numeric(substr(x = midas15_pat_type$HOSP,
+                                           start = 4,
+                                           stop = 6))
+unique(midas15_pat_type$HOSP)
 
 # Remove duplicates
 midas15_pat_type <- unique(midas15_pat_type)
-# 31,801 records removed
+# 19,123 records removed
 midas15_pat_type
 gc()
 
@@ -55,7 +62,8 @@ gc()
 midas15 <- merge(midas15_pat_type,
                  midas15,
                  by = c("Patient_ID",
-                        "ADMDAT"),
+                        "ADMDAT",
+                        "HOSP"),
                  all.y = TRUE,
                  sort = TRUE)
 rm(midas15_pat_type)
@@ -104,7 +112,9 @@ gc()
 unique(midas15$HOSP)
 length(unique(midas15$HOSP))
 sum(is.na(midas15$HOSP))
-# 94 + 1(#2000, error code?)
+subset(midas15,
+       HOSP == 2000)
+# 94 + 1(#2000, error code? 2,543 records) + NA
 
 # Sex----
 midas15[, SEX := factor(SEX, levels = c("F", "M"))]
@@ -155,7 +165,7 @@ table(midas15$HISPAN)
 # |--------------------------------------|
 # | Hispanic  | Non-hispanic | Unknown   |
 # |--------------------------------------|
-# | 2,174,098 | 15,139,071   | 1,762,756 |
+# | 2,169,776 | 15,080,383   | 1,757,964 |
 # |--------------------------------------|
 gc()
 
@@ -171,7 +181,7 @@ table(midas15$PAT_TYPE)
 # |-------------------------------------------------------|
 # | -1        | 0         | 1       | 2         | 3       |
 # |-------------------------------------------------------|
-# | 8,969,342 | 4,622,957 | 787,577 | 4,010,435 | 685,614 |
+# | 8,969,361 | 4,589,753 | 787,131 | 3,977,604 | 684,274 |
 # |-------------------------------------------------------|
 
 summary(midas15)
