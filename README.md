@@ -1,9 +1,10 @@
-### Project: MIDAS dataset preparation    
+## Project: MIDAS dataset preparation    
 ### Author: Davit Sargsyan   
 ### Created: 07/08/2017  
 
 ---
 
+## Daily Logs
 #### 07/15/2017
 * Mapped hospital numbers from 2008-2015 files to 1986-2007 files:
 `midas15_pat_type$HOSP <- as.numeric(substr(x = midas15_pat_type$HOSP, start = 4, stop = 6))`       
