@@ -17,11 +17,17 @@ More information can be found on [this WHO web page](http://www.who.int/classifi
 3. https://en.wikipedia.org/wiki/ICD-9-CM_Volume_3#.2800.29_Procedures_and_interventions.2C_not_elsewhere_classified 
 
 ## Daily Logs
-#### 07/15/2017
+### 10/14/2017
+* Recreated MIDAS15 with correct mapping for RACE variable
+
+### 10/13/2017
+* MIDAS15 data update: corrected RACE variable coding issue
+
+### 07/15/2017
 * Mapped hospital numbers from 2008-2015 files to 1986-2007 files:   
 `midas15_pat_type$HOSP <- as.numeric(substr(x = midas15_pat_type$HOSP, start = 4, stop = 6))`       
 
-#### 07/08/2017
+### 07/08/2017
 * Exported MIDAS variable PAT_TYPE from SAS for the years 2008 to 2015. The measure was not collected between 1986 and 2007.   
 * Imported CSV files (MIDAS and PAT_TYPE) to R and merged.   
 * Removed unused variables.    
