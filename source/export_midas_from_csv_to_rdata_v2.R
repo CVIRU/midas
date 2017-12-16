@@ -10,7 +10,7 @@ require(ggplot2)
 # The CSV was created on 03/25/2017 with 'export_midas.sas' 
 # and 'MIDAS format.sas' files
 # midas15 <- fread("C:/MIDAS/midas_1986_2015.csv")
-midas15 <- fread("C:/MIDAS/midas_2015_race_corrected.csv")
+midas15 <- fread("E:/MIDAS/midas_2015_race_corrected.csv")
 
 # Remove unused variables----
 midas15[, LOCATION := NULL]
@@ -40,7 +40,7 @@ gc()
 
 # Read Patient Type from CSV----
 # The CSV was created on 07/08/2017 with 'get_pat_type.sas' file
-midas15_pat_type <- fread("C:/MIDAS/midas_pat_type_2008_2015.csv")
+midas15_pat_type <- fread("E:/MIDAS/midas_pat_type_2008_2015.csv")
 setkey(midas15_pat_type,
        Patient_ID,
        ADMDAT)
@@ -178,6 +178,30 @@ kable(x = data.table(100*prop.table(table(Insurance = midas15$PRIME))),
 gc()
 
 # Hispanic----
+kable(format(data.frame(addmargins(table(midas15$HISPAN))), 
+             big.mark = ","))
+  # |Var1 |Freq       |
+  # |:----|:----------|
+  # |     |458,703    |
+  # |.    |27         |
+  # |0    |15,234,338 |
+  # |1    |140,352    |
+  # |2    |592,756    |
+  # |3    |146,803    |
+  # |4    |380,673    |
+  # |5    |495,277    |
+  # |6    |430        |
+  # |7    |91         |
+  # |8    |419        |
+  # |9    |1,780,650  |
+  # |A    |745        |
+  # |Sum  |19,231,264 |
+t1 <- addmargins(table(midas15$HISPAN,
+                       midas15$YEAR))
+kable(format(t(t1), 
+             big.mark = ","))
+
+
 midas15$HISP <- "Hispanic"
 midas15$HISP[midas15$HISPAN %in% c(".", "9", "A")] <- "Unknown"
 midas15$HISP[midas15$HISPAN == "0"] <- "Non-hispanic"

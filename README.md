@@ -17,6 +17,8 @@ More information can be found on [this WHO web page](http://www.who.int/classifi
 3. https://en.wikipedia.org/wiki/ICD-9-CM_Volume_3#.2800.29_Procedures_and_interventions.2C_not_elsewhere_classified 
 
 ## Daily Logs
+### 12/15/2017
+* Count of mismathces (*midas_mismatch_v1.R*)
 ### 10/14/2017
 * Recreated MIDAS15 with correct mapping for RACE variable
 
