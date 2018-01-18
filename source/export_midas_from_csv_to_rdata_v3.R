@@ -319,7 +319,7 @@ gc()
 # Admission type----
 unique(midas15$ADM_TYPE)
 sum(is.na(midas15$ADM_TYPE))
-# 449,565
+# 449,562
 midas15$ADM_TYPE[is.na(midas15$ADM_TYPE)] <- 6
 
 # 1 = inpatient
