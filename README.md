@@ -18,7 +18,8 @@ More information can be found on [this WHO web page](http://www.who.int/classifi
 
 ## Daily Logs
 ### 02/05/2018
-* Added ulcerative colitis counting
+* Added ulcerative colitis counting    
+* MIDAS-like data simulation
 
 ### 01/17/2018
 * New, clean MIDAS15 form Jerry (see *export_midas_from_csv_to_rdata_v3.R*)     
