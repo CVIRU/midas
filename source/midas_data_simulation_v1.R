@@ -1,6 +1,6 @@
 # |------------------------------------------------------------------------------|
 # | Project: Simulate dataset that is structured like MIDAS                      |
-# |          (BUT NO REAL PATIENTS' DATA!)                                      |
+# |          (BUT NO REAL PATIENTS' DATA!)                                       |
 # | Script: Data simulation                                                      |     
 # | Author: Davit Sargsyan                                                       | 
 # | Created: 02/05/2018                                                          |
