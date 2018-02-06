@@ -1,12 +1,14 @@
 # |------------------------------------------------------------------------------|
-# | Project: Source code for MIDAS data export from CSV and conversion to R data |     
+# | Project: MIDAS dataset exploration                                           |
+# | Script: Source code for MIDAS data export from CSV and conversion to R data  |     
 # | Author: Davit Sargsyan                                                       | 
 # | Created:  07/08/2017                                                         |
-# | Modified: 01/17/2018                                                         |
+# | Modified: 02/05/2018                                                         |
 # |------------------------------------------------------------------------------|
 # Header----
 # Save consol output to a log file
 sink(file = "tmp/log_export_midas_from_csv_to_rdata_v3.txt")
+date()
 
 # Load packages
 require(data.table)
@@ -358,7 +360,7 @@ kable(format(t2,
   # |2005 |577,083 |0       |0       |0      |127,862 |0      |
   # |2006 |588,371 |0       |0       |0      |126,017 |0      |
   # |2007 |588,754 |71      |0       |7      |129,067 |0      |
-  # |2008 |605,325 |367,296 |78,358  |79,690 |0       |0      |
+  # |2008 |605,325 |367,dim(296 |78,358  |79,690 |0       |0      |
   # |2009 |605,727 |418,515 |95,280  |78,481 |0       |0      |
   # |2010 |599,102 |456,049 |102,939 |83,263 |0       |0      |
   # |2011 |573,970 |478,392 |105,409 |78,614 |0       |0      |
@@ -393,3 +395,4 @@ save(midas15,
      compress = FALSE)
 
 sink()
+beepr::beep(3)

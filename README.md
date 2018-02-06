@@ -17,6 +17,9 @@ More information can be found on [this WHO web page](http://www.who.int/classifi
 3. https://en.wikipedia.org/wiki/ICD-9-CM_Volume_3#.2800.29_Procedures_and_interventions.2C_not_elsewhere_classified 
 
 ## Daily Logs
+### 02/05/2018
+* Added ulcerative colitis counting
+
 ### 01/17/2018
 * New, clean MIDAS15 form Jerry (see *export_midas_from_csv_to_rdata_v3.R*)     
 * New tables(*render_table_v2.Rmd*)
