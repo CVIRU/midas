@@ -17,6 +17,10 @@ More information can be found on [this WHO web page](http://www.who.int/classifi
 3. https://en.wikipedia.org/wiki/ICD-9-CM_Volume_3#.2800.29_Procedures_and_interventions.2C_not_elsewhere_classified 
 
 ## Daily Logs
+### 03/31/2018
+* Added Shiny app using package *icd*. This is a POC to show that we can easily create lists of ICD codes. Next step is to improve GUI (e.g. allow check-boxes or multi-inputs, print tables using package *DT*, etc), and seamlessly integrate into *icd* workflow for fast data subseting. 
+* Added scripts *icd9_app_v1.R*, *app.R* (i.e. *icd9_app_v2.R*) and *package_icd_example.R*. NOTE: app will not run unless it is names *app.R*, hence that will be the name of the most recent version.
+
 ### 02/21/2018
 * Added simulated processed MIDAS data for a mock ulcerative colitis study
 
