@@ -61,3 +61,21 @@ write.csv(dt1,
 
 dt1 <- icd9cm_hierarchy
 head(dt1)
+
+# New comorbidity map
+# Example:
+icd10_map_ahrq
+class(icd10_map_ahrq)
+
+# New
+map1 <- list(a = c("I674",
+                   "O10111",
+                   "O10112"),
+             b = c( "O10113",
+                    "O10119",
+                    "O1012"))
+map1
+
+map1 <- as.icd_comorbidity_map(map1)
+map1
+class(map1)
