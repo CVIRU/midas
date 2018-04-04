@@ -17,7 +17,7 @@ dt1 <- icd9cm_hierarchy
 input <- list()
 input$chapter = unique(as.character(dt1$chapter))[1]
 input$subchapter = unique(as.character(dt1$sub_chapter[dt1$chapter == input$chapter]))[1]
-input$major = unique(as.character(dt1$major[dt1$sub_chapter == input$subchapter]))[1]
+input$major = unique(as.character(dt1$major[dt1$sub_chapter == input$subchapter]))[2]
 input$dx = unique(as.character(dt1$long_desc[dt1$major == input$major]))[1]
 
 ui <- fluidPage(
@@ -33,10 +33,22 @@ ui <- fluidPage(
     ),
     mainPanel(
       DT:: dataTableOutput("tbl"),
+      br(),
+      actionButton(inputId = "do", 
+                   label = "Save Selection"),
+      br(),
+      DT:: dataTableOutput("tbl2"),
+      br(),
       downloadLink(outputId = "downloadData", 
                    label = "Download Selected Rows"),
+      br(),
       downloadLink(outputId = "downloadMap", 
-                   label = "Download Map of Selected Rows")
+                   label = "Download Map of Selected Rows"),
+      br(),
+      actionButton(inputId = "reset", 
+                   label = "Reset Table",
+                   style = "background-color: #FF0000")
+      
     )
   )
 )
@@ -50,8 +62,8 @@ server <- function(input, output) {
   
   output$majorIn <- renderUI({
     selectInput(inputId = "major", 
-                       label = "Major", 
-                       choices = unique(as.character(dt1$major[dt1$sub_chapter == input$subchapter])))
+                label = "Major", 
+                choices = unique(as.character(dt1$major[dt1$sub_chapter == input$subchapter])))
   })
   
   output$dxIn <- renderUI({
@@ -65,10 +77,26 @@ server <- function(input, output) {
   output$tbl <- DT::renderDT({
     DT::datatable(unique(dt1[dt1$long_desc %in% input$dx, ]),
                   options = list(pageLength = 10),
-                  selection = list(mode = "multiple",
-                                   selected = 1:nrow(unique(dt1[dt1$long_desc %in% input$dx, ])),
-                                   target = "row"))
+                  selection = list(mode = "multiple"))
   }) 
+  
+  # source: http://shiny.rstudio.com/articles/action-buttons.html
+  observeEvent(input$do, {
+    if (!exists("dtt")) {
+      dtt <- unique(dt1[dt1$long_desc %in% input$dx, ])
+    } else {
+      dtt <<- unique(rbind.data.frame(dtt,
+                                      dt1[dt1$long_desc %in% input$dx, ]))
+    }
+    dtt <<- dtt[order(as.numeric(rownames(dtt))), ]
+    output$tbl2 <- DT::renderDT({
+      DT::datatable(dtt,
+                    options = list(pageLength = 10),
+                    selection = list(mode = "multiple",
+                                     selected = 1:nrow(dtt),
+                                     target = "row"))
+    }) 
+  })
   
   # Source: https://shiny.rstudio.com/articles/download.html
   output$downloadData <- downloadHandler(
@@ -79,7 +107,7 @@ server <- function(input, output) {
             sep = "")
     },
     content = function(file) {
-      tmp <- unique(dt1[dt1$long_desc %in% input$dx, ])[input$tbl_rows_selected, ]
+      tmp <- dtt[input$tbl2_rows_selected, ]
       write.csv(tmp, 
                 file,
                 row.names = FALSE)
@@ -95,14 +123,24 @@ server <- function(input, output) {
             sep = "")
     },
     content = function(file) {
-      tmp <- unique(dt1[dt1$long_desc %in% input$dx, ])[input$tbl_rows_selected, ]
-      l1 <- list(unique(c(tmp$code)))
-      names(l1) <- tmp$major[1]
+      tmp <- dtt[input$tbl2_rows_selected, ]
+      l1 <- list()
+      for (i in 1:length(unique(tmp$major))) {
+        l1[[i]] <- unique(c(tmp$code[tmp$major == unique(tmp$major)[i]]))
+      }
+      names(l1) <- unique(tmp$major)
       l1 <- as.icd_comorbidity_map(l1)
       save(l1,
            file = file)
     }
   )
+  
+  # reset diagnoses table
+  observeEvent(input$reset, {
+    if (exists("dtt")) {
+      dtt <<- NULL
+    } 
+  })
 }
 
 shinyApp(ui, server)
