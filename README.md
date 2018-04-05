@@ -17,11 +17,16 @@ More information can be found on [this WHO web page](http://www.who.int/classifi
 3. https://en.wikipedia.org/wiki/ICD-9-CM_Volume_3#.2800.29_Procedures_and_interventions.2C_not_elsewhere_classified 
 
 ## Daily Logs
+### 04/04/2018
+* Keeping selected diagnoses after switching to the next category (2nd table)    
+* Added codes to diagnoses labels in the drop-down menu    
+* Reseting Table2 (very rough: must click "Reset", then "Save" again to reset to current Table1 values only)    
+* ToDo: improve reset
+
 ### 04/03/2018
 * Replaced text boxes wit DT table. 
 * Download only SELECTED rows (all selected by default)
 * Output a map file, i.e. R list with mapped diagnoses 
-* ToDo: Keep selected diagnoses after switching to the next category
 
 ### 03/31/2018
 * Added Shiny app using package *icd*. This is a POC to show that we can easily create lists of ICD codes. Next step is to improve GUI (e.g. allow check-boxes or multi-inputs, print tables using package *DT*, etc), and seamlessly integrate into *icd* workflow for fast data subseting. 

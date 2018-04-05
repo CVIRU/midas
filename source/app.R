@@ -11,14 +11,24 @@
 options(stringsAsFactors = FALSE)
 require(icd)
 require(DT)
-dt1 <- icd9cm_hierarchy
+dt0 <- icd9cm_hierarchy
+dt0$short_desc <- NULL
+
+# Display ICD codes along with labels----
+dt1 <- dt0
+dt1$long_desc <- paste(dt1$code,
+                       dt1$long_desc,
+                       sep = ":")
+dt1$major <- paste(dt1$three_digit,
+                       dt1$major,
+                       sep = ":")
 
 # # TEST: bypass user interface!
-input <- list()
-input$chapter = unique(as.character(dt1$chapter))[1]
-input$subchapter = unique(as.character(dt1$sub_chapter[dt1$chapter == input$chapter]))[1]
-input$major = unique(as.character(dt1$major[dt1$sub_chapter == input$subchapter]))[2]
-input$dx = unique(as.character(dt1$long_desc[dt1$major == input$major]))[1]
+# input <- list()
+# input$chapter = unique(as.character(dt1$chapter))[1]
+# input$subchapter = unique(as.character(dt1$sub_chapter[dt1$chapter == input$chapter]))[1]
+# input$major = unique(as.character(dt1$major[dt1$sub_chapter == input$subchapter]))[2]
+# input$dx = unique(as.character(dt1$long_desc[dt1$major == input$major]))[1]
 
 ui <- fluidPage(
   titlePanel("ICD-9 Clinical Modification Codes & Diagnoses"),
@@ -48,7 +58,6 @@ ui <- fluidPage(
       actionButton(inputId = "reset", 
                    label = "Reset Table",
                    style = "background-color: #FF0000")
-      
     )
   )
 )
@@ -75,18 +84,18 @@ server <- function(input, output) {
   
   # Source: https://yihui.shinyapps.io/DT-rows/
   output$tbl <- DT::renderDT({
-    DT::datatable(unique(dt1[dt1$long_desc %in% input$dx, ]),
+    DT::datatable(unique(dt0[dt1$long_desc %in% input$dx, ]),
                   options = list(pageLength = 10),
                   selection = list(mode = "multiple"))
   }) 
   
-  # source: http://shiny.rstudio.com/articles/action-buttons.html
+  # Source: http://shiny.rstudio.com/articles/action-buttons.html
   observeEvent(input$do, {
     if (!exists("dtt")) {
-      dtt <- unique(dt1[dt1$long_desc %in% input$dx, ])
+      dtt <- unique(dt0[dt1$long_desc %in% input$dx, ])
     } else {
       dtt <<- unique(rbind.data.frame(dtt,
-                                      dt1[dt1$long_desc %in% input$dx, ]))
+                                      dt0[dt1$long_desc %in% input$dx, ]))
     }
     dtt <<- dtt[order(as.numeric(rownames(dtt))), ]
     output$tbl2 <- DT::renderDT({
@@ -95,7 +104,7 @@ server <- function(input, output) {
                     selection = list(mode = "multiple",
                                      selected = 1:nrow(dtt),
                                      target = "row"))
-    }) 
+    })
   })
   
   # Source: https://shiny.rstudio.com/articles/download.html
@@ -135,11 +144,12 @@ server <- function(input, output) {
     }
   )
   
-  # reset diagnoses table
+  # Reset diagnoses table
   observeEvent(input$reset, {
     if (exists("dtt")) {
-      dtt <<- NULL
-    } 
+      rm(dtt,
+         envir = .GlobalEnv)
+    }
   })
 }
 
