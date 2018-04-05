@@ -9,7 +9,7 @@ require(icd)
 require(data.table)
 
 # Part I: Load 'l1' from Shiny mapping file
-load("C:/git_local/midas/docs/icd9_map_2018-04-04.RData")
+load("docs/icd9_map_2018-04-04.RData")
 l1
 # $`Essential hypertension`
 # [1] "4010" "4011"
@@ -30,7 +30,7 @@ class(l1)
 # "icd_comorbidity_map" "list" 
 
 # Part II: load simulated data----
-load("C:/git_local/midas/docs/MIDAS Data Simulation 02052018/dt.sim.RData")
+load("docs/MIDAS Data Simulation 02052018/dt.sim.RData")
 dt.sim
 
 # Separate visit numbers and diagnoses only----
