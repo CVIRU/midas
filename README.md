@@ -18,7 +18,7 @@ More information can be found on [this WHO web page](http://www.who.int/classifi
 
 ## Daily Logs
 ### 04/07/2018
-* Moved all 'icd'-related code to new project 'shiny.icd'
+* Moved all 'icd'-related code to new project 'shiny.icd'  
 
 ### 04/04/2018
 * Keeping selected diagnoses after switching to the next category (2nd table)    
