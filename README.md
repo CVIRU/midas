@@ -17,6 +17,9 @@ More information can be found on [this WHO web page](http://www.who.int/classifi
 3. https://en.wikipedia.org/wiki/ICD-9-CM_Volume_3#.2800.29_Procedures_and_interventions.2C_not_elsewhere_classified 
 
 ## Daily Logs
+### 04/07/2018
+* Moved all 'icd'-related code to new project 'shiny.icd'
+
 ### 04/04/2018
 * Keeping selected diagnoses after switching to the next category (2nd table)    
 * Added codes to diagnoses labels in the drop-down menu    
