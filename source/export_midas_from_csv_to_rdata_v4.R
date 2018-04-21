@@ -9,7 +9,7 @@
 # |------------------------------------------------------------------------------|
 # Header----
 # Save consol output to a log file
-sink(file = "tmp/log_export_midas_from_csv_to_rdata_v3.txt")
+sink(file = "tmp/log_export_midas_from_csv_to_rdata_v4.txt")
 date()
 
 # Load packages
