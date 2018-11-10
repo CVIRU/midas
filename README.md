@@ -11,12 +11,15 @@ ICD is used by physicians, nurses, other providers, researchers, health informat
    
 More information can be found on [this WHO web page](http://www.who.int/classifications/icd/en/).
 
-### Sources:  
-1. http://www.icd9data.com/2012/Volume1/default.htm    
-2. http://icd9cm.chrisendres.com/index.php?action=procslist   
-3. https://en.wikipedia.org/wiki/ICD-9-CM_Volume_3#.2800.29_Procedures_and_interventions.2C_not_elsewhere_classified 
+## Table of Contents
+[Daily Logs](#log)    
+[File Legend](#legend)      
+[References](#ref)   
 
-## Daily Logs
+## Daily Log<a name="log"></a>
+### 11/07/2018
+* Big MIDAS received and processed. converted files from **.CSV** to **.RData**.
+
 ### 04/07/2018
 * Moved all 'icd'-related code to new project 'shiny.icd'  
 
@@ -64,3 +67,12 @@ More information can be found on [this WHO web page](http://www.who.int/classifi
 * Imported CSV files (MIDAS and PAT_TYPE) to R and merged.   
 * Removed unused variables.    
 * Converted and preprocessed variables.   
+
+##File Legend<a name="legend"></a>  
+***export_big_midas_from_csv_to_rdata_v1.R***: convert **.CSV** files containing Big MIDAS to **.RData** files.    
+***export_midas_from_csv_to_rdata_v4.R***: convert **.CSV** files containing MIDAS to **.RData** files.    
+
+##References<a name="ref"></a>  
+1. http://www.icd9data.com/2012/Volume1/default.htm    
+2. http://icd9cm.chrisendres.com/index.php?action=procslist   
+3. https://en.wikipedia.org/wiki/ICD-9-CM_Volume_3#.2800.29_Procedures_and_interventions.2C_not_elsewhere_classified 
