@@ -18,7 +18,7 @@ More information can be found on [this WHO web page](http://www.who.int/classifi
 
 ## Daily Log<a name="log"></a>
 ### 12/07/2018
-* Added TAVR counts for Aakash (***midas_tavr_v1.R***).
+* Added TAVR counts for Aakash (***midas_tavr_v1.R***). See also ***bigmidas*** repo for TAVR counts there.
 
 ### 11/07/2018
 * Big MIDAS received and processed. converted files from **.CSV** to **.RData**.
